@@ -36,12 +36,9 @@ namespace SocialPandaLibrary
 
             set
             {
+                email = value;
                 Match match = regex.Match(email);
-                if (match.Success)
-                {
-                    email = value;
-                }
-                else
+                if (!match.Success)
                 {
                     throw new ArgumentException("Email is in incorrect format");
                 }
