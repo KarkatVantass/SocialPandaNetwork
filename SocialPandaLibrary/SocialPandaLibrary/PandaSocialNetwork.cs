@@ -52,7 +52,7 @@ namespace SocialPandaLibrary
                 return panda.ListP;
             }
         }
-        public void ConnectionLevel(Panda one, Panda two)
+        public int ConnectionLevel(Panda one, Panda two)
         {
             cheked.Add(one);
             connectionLevel++;
@@ -65,15 +65,36 @@ namespace SocialPandaLibrary
                 else if (friend.Equals(two))
                 {
                     Console.WriteLine(connectionLevel);
+                    return connectionLevel;
                 }
                 else
                 {
                     cheked.Add(friend);
                     ConnectionLevel(friend, two);
                 }
-                
             }
+            
         }
-    }
+        public int HowManyGenderInNetwork(int level, Panda PandaForFriends, Gender gender)
+        {
+            int genderInLevel = 0;
+            if(PandaForFriends.Gender == gender)
+            {
+                genderInLevel++;
+            } 
+            foreach (var pnd in PandaForFriends.ListP)
+            {
+                if(ConnectionLevel(PandaForFriends, pnd) >= level)
+                {
+                    break;
+                }
+                if(pnd.Gender == gender)
+                {
+                    genderInLevel++;
+                }
+            }
+            return genderInLevel;
+        }
 
+    }
 }
