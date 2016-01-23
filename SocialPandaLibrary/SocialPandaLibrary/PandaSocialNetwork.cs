@@ -8,7 +8,7 @@ namespace SocialPandaLibrary
 {
     public class PandaSocialNetwork
     {
-        private List<Panda> pandas; 
+        private List<Panda> pandas;
         public PandaSocialNetwork()
         {
             pandas = new List<Panda>();
@@ -78,14 +78,35 @@ namespace SocialPandaLibrary
                 }
             }
             return -1;
-        }
+                }
         public bool AreConnected(Panda one,Panda two)
         {
             if (ConnectionLevel(one,two) != -1)
-            {
+                {
                 return true;
             }
             return false;
+        }
+
+        public int HowManyGenderInNetwork(int level, Panda PandaForFriends, Gender gender)
+        {
+            int genderInLevel = 0;
+            if (PandaForFriends.Gender == gender)
+            {
+                genderInLevel++;
+            }
+            foreach (var pnd in PandaForFriends.ListP)
+            {
+                if (ConnectionLevel(PandaForFriends, pnd) >= level)
+                {
+                    break;
+                }
+                if (pnd.Gender == gender)
+                {
+                    genderInLevel++;
+                }
+            }
+            return genderInLevel;
         }
     }
 
