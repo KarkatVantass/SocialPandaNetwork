@@ -12,7 +12,7 @@ namespace SocialPandaLibrary.Tests
     public class PandaTests
     {
         [TestMethod()] 
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(IncorrectFormatEmailExcception))]
         public void PandaTestEmailPropertyChecker()
         {
             try
@@ -21,9 +21,9 @@ namespace SocialPandaLibrary.Tests
                 Panda ruski = new Panda("Ivan", "rbv.bg", Gender.male);
                 Assert.Fail();
             }
-            catch (ArgumentException)
+            catch (IncorrectFormatEmailExcception)
             {
-                throw new ArgumentException();
+                throw new IncorrectFormatEmailExcception();
             }
             
         }
@@ -37,7 +37,7 @@ namespace SocialPandaLibrary.Tests
                 //Inserting correct email format
                 Panda ruski = new Panda("Ivan", "ivanov961@abv.bg", Gender.male);
             }
-            catch (ArgumentException)
+            catch (IncorrectFormatEmailExcception)
             {
                 Assert.Fail();
             }

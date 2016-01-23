@@ -12,8 +12,8 @@ namespace SocialPandaLibrary
         private string name;
         private string email;
         private Gender gender;
+        private List<Panda> listP;
         private Regex regex;
-
         public string Name
         {
             get
@@ -37,11 +37,11 @@ namespace SocialPandaLibrary
             set
             {
                 email = value;
-                Match match = regex.Match(email);
-                if (!match.Success)
-                {
-                    throw new ArgumentException("Email is in incorrect format");
-                }
+                //Match match = regex.Match(email);
+                //if (!match.Success)
+                //{
+                //    throw new IncorrectFormatEmailExcception();
+                //}
             }
         }
 
@@ -58,12 +58,26 @@ namespace SocialPandaLibrary
             }
         }
 
+        public List<Panda> ListP
+        {
+            get
+            {
+                return listP;
+            }
+
+            set
+            {
+                listP = value;
+            }
+        }
+
         public Panda(string name, string email, Gender gender)
         {
-            regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            regex = new Regex(@"^@([\w\-]+)((\.(\w([\w\.\-]+)){2,3})+)$");
             this.Name = name;
-            this.Email = email;
+            Email = email;
             this.Gender = gender;
+            ListP = new List<Panda>();
         }
         public override string ToString()
         {
@@ -85,6 +99,14 @@ namespace SocialPandaLibrary
                 return true;
             }
             return false;
+        }
+        public void Befriend(Panda panda)
+        {
+            if (ListP.Contains(panda))
+            {
+                throw new Exception();///TO DO CUSTOM EXC
+            }
+            ListP.Add(panda);
         }
     }
 
